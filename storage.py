@@ -5,6 +5,7 @@ def load_tasks():
             return json.load(f)
     except FileNotFoundError:
         return[]
-def save_tasks(b):
+    
+def save_tasks(tasks):
     with open("tasks.json","w") as f:
-        json.dump(b,f, indent=2)
+        json.dump(tasks,f, indent=2)

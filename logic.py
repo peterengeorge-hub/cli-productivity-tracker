@@ -1,20 +1,22 @@
-from datetime import date, datetime, timedelta
-def add_to_list(tasks,task):
-    z=date.today()
-    c = {}
-    d = " ".join(task)
-    c["task"] = d
-    c["creation_date"] = z.isoformat()
-    c["completion_date"] = None
-    c["done"] = False
-    tasks.append(c)
+from datetime import date, timedelta
+def add_to_list(tasks,task_words):
+    today = date.today()
+    new_task = {}
+    task_text = " ".join(task_words)
+    new_task["task"] = task_text
+    new_task["creation_date"] = today.isoformat()
+    new_task["completion_date"] = None
+    new_task["done"] = False
+    tasks.append(new_task)
+
 def show(tasks):
     print("------ TASKS ------\n")
     for i,item in enumerate(tasks,start=1):
             if item["done"]:
                 print(f'{i} :[✔ ]: {item["task"]}')
             else:
-                print(f'{i} :[  ]:{item["task"]}')
+                print(f'{i} :[  ]: {item["task"]}')
+
 def mark_done(tasks,task_no):
     try:
         z = date.today()
@@ -23,6 +25,7 @@ def mark_done(tasks,task_no):
         t["done"] = True
     except (IndexError,ValueError):
         print(f"task no {task_no} does not exist")
+        
 def streak(tasks):
     a=set()
     for i in tasks:
@@ -49,7 +52,7 @@ def search(tasks,word):
             if item["done"]:
                 print(f'{i} :[✔ ]: {item["task"]}')
             else:
-                print(f'{i} :[  ]:{item["task"]}')
+                print(f'{i} :[  ]: {item["task"]}')
     if matches == 0:
         print("No matching tasks found")
 
@@ -61,18 +64,20 @@ def stats(tasks):
         if i["done"]:
             completed_no+=1
     pending_no = total-completed_no
-    rate = round((completed_no/total)*100,2)
+    rate = round((completed_no/total)*100,2) if total > 0 else 0
     print("----- STATS -----\n")
     print(f"Total tasks      : {total}")
     print(f"Completed        : {completed_no}")
     print(f"Pending          : {pending_no}")
     print(f"Completion rate  : {rate}%")
-    print(f"Current streak   : {stre}")
+    print(f"Current streak   : {streak(tasks)}")
 
 def remove(tasks,task_no):
-    tasks.pop(task_no-1)
+    try:   
+        tasks.pop(task_no-1)
 
-
+    except IndexError:
+        print("the typed task no does not exist ")
 
 
 
