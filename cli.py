@@ -47,7 +47,8 @@ elif args.command == "search":
 
 elif args.command == "stats":
     stats(tasks)
-    
+
 elif args.command == "delete":
     remove(tasks,args.task_no)
     save_tasks(tasks)
+    print("deleted")
