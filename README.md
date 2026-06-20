@@ -27,14 +27,6 @@ python cli.py <command>
 - stats → Shows task statistics
 - streak → Shows current completion streak
 
-## Usage examples
-python cli.py add "finish assignment"
-python cli.py list
-python cli.py mark_done 1
-python cli.py delete 1
-python cli.py search assignment
-python cli.py stats
-python cli.py streak
 
 ## Setup
 
